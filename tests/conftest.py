@@ -4,7 +4,7 @@ from fason import JsonDb
 
 
 @pytest.fixture(scope="function")
-def sample_data():
+def sample_dict():
   return {
     "1": "num_value",
     "key": "value",
@@ -36,11 +36,11 @@ def sample_data():
   }
 
 @pytest.fixture(scope="function")
-def json_db(tmpdir, sample_data):
+def dict_db(tmpdir, sample_dict):
   path = tmpdir + "/db.json"
 
   with open(path, "w") as f:
-    json.dump(sample_data, f)
+    json.dump(sample_dict, f)
 
   db = JsonDb(path)
 

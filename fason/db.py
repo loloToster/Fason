@@ -51,11 +51,11 @@ class JsonObject:
       return value
 
 
-  def to_dict(self):
+  def to_native(self):
     parsed = {}
 
     for k, v in self.data.items():
-      parsed[k] = v.to_dict() if isinstance(v, JsonObject) else v
+      parsed[k] = v.to_native() if isinstance(v, JsonObject) else v
 
     return parsed
 
@@ -87,4 +87,4 @@ class JsonDb(JsonObject):
       return
 
     with open(self._path, "w+") as f:
-      json.dump(self.to_dict(), f, indent=2)
+      json.dump(self.to_native(), f, indent=2)
